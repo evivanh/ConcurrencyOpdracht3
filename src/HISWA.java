@@ -1,3 +1,4 @@
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -13,40 +14,62 @@ public class HISWA {
 
     private int nrOfViewers = 0;
     private int nrOfBuyers = 0;
+    private boolean buyerWaiting;
+    private boolean buyerInside;
 
-    private Condition placeAvailable;
+    private Condition placeAvailableForViewer, placeAvailableForBuyer;
 
-    public void HISWA(){
+    public HISWA(){
         lock = new ReentrantLock();
-        placeAvailable = lock.newCondition();
+        placeAvailableForViewer = lock.newCondition();
+        placeAvailableForBuyer = lock.newCondition();
     }
 
-    public void visitHISWA() throws InterruptedException{
-
+    public void viewerVisitsHISWA() throws InterruptedException{
+        lock.lock();
         try {
-            while(noPlaceAvailable ())
-                placeAvailable.wait();
+            while(noPlaceAvailableForViewers()) {
+                System.out.println(Thread.currentThread().getName() + " waits in line to enter the HISWA");
 
-            System.out.println(Thread.currentThread().getName() + " waits in line to enter the HISWA");
+                placeAvailableForViewer.await();
+            }
+
 
             nrOfViewers++;
+            System.out.println(Thread.currentThread().getName() + " enters the HISWA");
+            placeAvailableForViewer.signal();
 
         } finally {
                 lock.unlock();
         }
 
-
-
     }
 
-    private boolean noPlaceAvailable() {
+    public void buyerVisitsHISWA() throws InterruptedException {
+        lock.lock();
+        try{
+            while (noPlaceAvailableForBuyer()) {
+                System.out.println(Thread.currentThread().getName() + " waits in line to enter the HISWA");
+                buyerWaiting = true;
+                placeAvailableForBuyer.await();
 
-        if (nrOfViewers == MAXIMUM_AMOUNT_VISITORS){
-            return true;
-        }else if (nrOfBuyers > 0){
-            return true;
-        }else {
-            return false;
+            }
+
+            nrOfBuyers++;
+            buyerInside = true;
+            System.out.println(Thread.currentThread().getName() + " enters the HISWA");
+            placeAvailableForBuyer.signal();
+
+        } finally {
+            lock.unlock();
         }
+    }
+
+    private boolean noPlaceAvailableForBuyer(){
+        return nrOfBuyers == 4 || nrOfViewers > 0 || buyerInside;
+    }
+
+    private boolean noPlaceAvailableForViewers() {
+        return nrOfViewers == MAXIMUM_AMOUNT_VISITORS || buyerInside || buyerWaiting;
     }
 }
