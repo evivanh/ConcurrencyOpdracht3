@@ -25,7 +25,7 @@ public class Viewer extends Thread {
 
     private void justLive() throws InterruptedException {
         System.out.println("\t\t" + getName() + " living.");
-        Thread.sleep((int) (Math.random() * 1000));
+        Thread.sleep((int) (Math.random() * 1000) + 1);
     }
 
 }

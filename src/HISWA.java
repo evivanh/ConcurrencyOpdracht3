@@ -37,12 +37,15 @@ public class HISWA {
 
             nrOfViewers++;
             System.out.println(Thread.currentThread().getName() + " enters the HISWA");
+            
+
+            nrOfViewers--;
+            System.out.println(Thread.currentThread().getName() + " is leaving the HISWA");
             placeAvailableForViewer.signal();
 
         } finally {
                 lock.unlock();
         }
-
     }
 
     public void buyerVisitsHISWA() throws InterruptedException {
@@ -58,7 +61,10 @@ public class HISWA {
             nrOfBuyers++;
             buyerInside = true;
             System.out.println(Thread.currentThread().getName() + " enters the HISWA");
+            Thread.currentThread().sleep(3000);
             placeAvailableForBuyer.signal();
+            System.out.println(Thread.currentThread().getName() + " is leaving the HISWA");
+
 
         } finally {
             lock.unlock();
@@ -66,7 +72,7 @@ public class HISWA {
     }
 
     private boolean noPlaceAvailableForBuyer(){
-        return nrOfBuyers == 4 || nrOfViewers > 0 || buyerInside;
+        return nrOfBuyers == 4 || nrOfViewers > 0 || buyerInside ;
     }
 
     private boolean noPlaceAvailableForViewers() {
