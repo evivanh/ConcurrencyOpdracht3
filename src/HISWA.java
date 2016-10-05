@@ -37,7 +37,9 @@ public class HISWA {
 
             nrOfViewers++;
             System.out.println(Thread.currentThread().getName() + " enters the HISWA");
-            
+
+            //TODO: sleep threads when viewers are inside, do not sleep every viewer but sleep the entire hiswa?
+//            Thread.currentThread().sleep(2000);
 
             nrOfViewers--;
             System.out.println(Thread.currentThread().getName() + " is leaving the HISWA");
@@ -61,6 +63,7 @@ public class HISWA {
             nrOfBuyers++;
             buyerInside = true;
             System.out.println(Thread.currentThread().getName() + " enters the HISWA");
+
             Thread.currentThread().sleep(3000);
             placeAvailableForBuyer.signal();
             System.out.println(Thread.currentThread().getName() + " is leaving the HISWA");
