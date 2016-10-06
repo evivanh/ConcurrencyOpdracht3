@@ -2,7 +2,7 @@
  * Created by Evi on 28-9-2016.
  */
 public class World {
-    private static final int NR_OF_VIEWERS = 30;
+    private static final int NR_OF_VIEWERS = 20;
     private static final int NR_OF_BUYERS = 5;
 
     /**

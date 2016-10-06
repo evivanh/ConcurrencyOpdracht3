@@ -14,11 +14,22 @@ public class Viewer extends Thread {
         while (true) {
             try {
                 justLive();
+
                 hiswa.viewerVisitsHISWA();
+                isLooking();
+                hiswa.viewerIsLeaving();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
+
+        }
+    }
+
+    private  void isLooking() {
+        try {
+            Thread.currentThread().sleep(2000);
+        } catch (InterruptedException ie){
 
         }
     }
