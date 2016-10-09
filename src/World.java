@@ -2,8 +2,8 @@
  * Created by Evi on 28-9-2016.
  */
 public class World {
-    private static final int NR_OF_VIEWERS = 20;
-    private static final int NR_OF_BUYERS = 5;
+    private static final int NR_OF_VIEWERS = 5;
+    private static final int NR_OF_BUYERS =2;
 
     /**
      *
@@ -19,12 +19,12 @@ public class World {
 
 
         for (int i = 0; i <NR_OF_VIEWERS ; i++) {
-            viewer[i] = new Viewer("v"+i, hiswa);
+            viewer[i] = new Viewer("v"+(i+1), hiswa);
             viewer[i].start();
         }
 
         for (int i = 0; i <NR_OF_BUYERS ; i++) {
-            buyer[i] = new Buyer("b"+i, hiswa);
+            buyer[i] = new Buyer("b"+(i+1), hiswa);
             buyer[i].start();
         }
     }

@@ -14,10 +14,21 @@ public class Buyer extends Thread {
             try {
                 justLive();
                 hiswa.buyerVisitsHISWA();
+                isLooking();
+                hiswa.buyerIsLeaving();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
+
+        }
+    }
+
+    private void isLooking() {
+        try {
+            System.out.println(currentThread().getName() + " is in the HISWA.");
+            Thread.sleep((int) (Math.random() * 1000));
+        } catch (InterruptedException ie){
 
         }
     }

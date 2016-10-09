@@ -14,24 +14,24 @@ public class Viewer extends Thread {
         while (true) {
             try {
                 justLive();
-
                 hiswa.viewerVisitsHISWA();
                 isLooking();
                 hiswa.viewerIsLeaving();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
-    private  void isLooking() {
-        try {
-            Thread.currentThread().sleep(2000);
-        } catch (InterruptedException ie){
+    private void isLooking() {
 
+        System.out.println("\t\t" +currentThread().getName() + " is in the HISWA.");
+        try {
+            Thread.sleep((int) (Math.random() * 1000) + 1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
     }
 
     private void justLive() throws InterruptedException {
