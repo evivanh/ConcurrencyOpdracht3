@@ -25,7 +25,7 @@ public class Viewer extends Thread {
 
     private void isLooking() {
 
-        System.out.println("\t\t" +currentThread().getName() + " is in the HISWA.");
+        System.out.println("\t\t" + currentThread().getName() + " is in the HISWA.");
         try {
             Thread.sleep((int) (Math.random() * 1000) + 1);
         } catch (InterruptedException e) {

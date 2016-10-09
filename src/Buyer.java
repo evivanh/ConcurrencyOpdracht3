@@ -20,7 +20,6 @@ public class Buyer extends Thread {
                 e.printStackTrace();
             }
 
-
         }
     }
 
@@ -28,13 +27,13 @@ public class Buyer extends Thread {
         try {
             System.out.println(currentThread().getName() + " is in the HISWA.");
             Thread.sleep((int) (Math.random() * 1000));
-        } catch (InterruptedException ie){
+        } catch (InterruptedException ie) {
 
         }
     }
 
     private void justLive() throws InterruptedException {
         System.out.println(getName() + " living.");
-        Thread.sleep((int) (Math.random() * 1000) +1);
+        Thread.sleep((int) (Math.random() * 1000) + 1);
     }
 }
